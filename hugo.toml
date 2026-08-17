@@ -27,6 +27,7 @@ ShowBreadCrumbs = true
 ShowCodeCopyButtons = true
 ShowShareButtons = false
 comments = true
+DateFormat = "2006年1月2日"
 
 [params.homeInfoParams]
 Title = "你好，我是 diankao"
