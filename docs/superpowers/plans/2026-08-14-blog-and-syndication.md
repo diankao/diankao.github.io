@@ -371,6 +371,12 @@ class TestCleanMarkdown(unittest.TestCase):
         self.assertIn("前文", out)
         self.assertIn("后文", out)
 
+    def test_strips_html_comments(self):
+        out = clean_markdown("前文\n<!-- 写作提示块 -->\n后文")
+        self.assertNotIn("提示块", out)
+        self.assertIn("前文", out)
+        self.assertIn("后文", out)
+
 
 class TestAppendSourceLink(unittest.TestCase):
     def test_appends_origin_url(self):
@@ -467,6 +473,7 @@ MAP_FILE = ".cnblogs-map.json"
 FRONT_MATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)
 KV_RE = re.compile(r"^([\w-]+):\s*(.*)$")
 SHORTCODE_RE = re.compile(r"\{\{[<>%].*?[<>%]\}\}", re.DOTALL)
+HTML_COMMENT_RE = re.compile(r"<!--.*?-->", re.DOTALL)
 
 
 def parse_front_matter(text):
@@ -482,7 +489,7 @@ def parse_front_matter(text):
 
 
 def clean_markdown(body):
-    return SHORTCODE_RE.sub("", body).strip()
+    return HTML_COMMENT_RE.sub("", SHORTCODE_RE.sub("", body)).strip()
 
 
 def append_source_link(body, url):
