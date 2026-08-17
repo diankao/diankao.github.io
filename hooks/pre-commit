@@ -1,0 +1,4 @@
+#!/bin/sh
+# 文章规范校验；python 不可用时静默放行，不阻塞提交
+command -v python >/dev/null 2>&1 || exit 0
+exec python scripts/check_posts.py
