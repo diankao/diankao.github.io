@@ -1,0 +1,36 @@
+baseURL = "https://selfblog.pages.dev/"
+languageCode = "zh-cn"
+defaultContentLanguage = "zh-cn"
+title = "我的博客"
+theme = "PaperMod"
+enableEmoji = true
+
+[permalinks]
+posts = "/posts/:slug/"
+
+[markup]
+[markup.highlight]
+noClasses = false
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
+
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+
+[params]
+env = "production"
+defaultTheme = "auto"
+ShowReadingTime = true
+ShowPostNavLinks = true
+ShowBreadCrumbs = true
+ShowCodeCopyButtons = true
+ShowShareButtons = false
+
+[params.homeInfoParams]
+Title = "你好，我是 diankao"
+Content = "在这里记录技术与生活"
+
+[[params.socialIcons]]
+name = "github"
+url = "https://github.com/diankao"
