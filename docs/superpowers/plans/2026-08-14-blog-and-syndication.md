@@ -16,13 +16,17 @@
 |------|------|------|
 | 博客形态 | 静态博客，不上 WordPress/Ghost | 零运维、免服务器、文章资产在 git 里天然可迁移 |
 | 框架 | Hugo + PaperMod 主题 | 构建快、主题成熟、配置简单 |
-| 托管 | Cloudflare Pages | 国内访问比 Vercel/GitHub Pages 稳，免费，自动 CI |
-| 域名/备案 | 先用 `*.pages.dev`，域名后补；不备案 | 博客走海外托管免备案；云服务器将来只跑非网站服务（frp/MC）同样免备案 |
+| 托管 | GitHub Pages（GitHub Actions 构建部署），仓库 `diankao.github.io` | 原定 Cloudflare Pages，因不想注册额外海外账号改为 GitHub 全家桶（见变更记录）；github.io 国内直连时快时慢，后期买域名可再优化 |
+| 域名/备案 | 先用 `https://diankao.github.io/`，域名后补；不备案 | 博客走海外托管免备案；云服务器将来只跑非网站服务（frp/MC）同样免备案 |
 | 评论 | giscus（GitHub Discussions） | 免费、无后端、不泄露读者数据 |
 | 一文多发 | 博客园走 Actions + MetaWeblog 全自动；B站/知乎/掘金手动贴 | 有官方 API 的才自动化，无 API 的平台浏览器自动化太脆且有风控/封号风险 |
 | 重复内容策略 | 同步版全文末尾附"本文首发于 主站链接" | 接受平台版本在百度排名更高的现实，定位为引流渠道 |
 | 服务器演进 | 阶段三再买轻量云（仅 frp 服务端 + Uptime Kuma）；MC/Gitea/RSS 放家里设备 Docker Compose | 云当公网入口，家里当算力；上 k8s 无必要 |
 | 迁移路径 | 后期可把同一仓库改成 Actions 构建后 rsync 推到自己服务器 | 静态产物放哪都行，域名换解析即切换 |
+
+### 变更记录
+
+- **2026-08-17：托管方案由 Cloudflare Pages 改为 GitHub Pages + Actions 部署**。原因：用户不想为注册 Cloudflare 额外养一个海外账号（+86 收码顾虑）。仓库由 `diankao-blog` 改名为 `diankao.github.io`（用户页仓库，站点直达根路径，避免 `/diankao-blog/` 前缀）；2024 年的旧同名仓库已归档为 `diankao.github.io.archive`（仅一次提交、纯构建产物，全保留可找回）。`baseURL` 改为 `https://diankao.github.io/`，部署由 `.github/workflows/deploy.yml` 完成（Hugo 0.161.0 → upload-pages-artifact → deploy-pages）。Task 3 中 Cloudflare 网页配置步骤作废；Task 7 的 `SITE_BASE_URL` 取值改为 `https://diankao.github.io`。
 
 ## 二、前置条件（需要你本人完成的账号类操作）
 
@@ -562,7 +566,7 @@ GitHub 仓库 → Settings → Secrets and variables → Actions → New reposit
 | `CNBLOGS_METAWEBLOG_URL` | `https://rpc.cnblogs.com/metaweblog/<你的博客名>` |
 | `CNBLOGS_USERNAME` | 博客园用户名 |
 | `CNBLOGS_TOKEN` | 博客园后台生成的 MetaWeblog 访问令牌 |
-| `SITE_BASE_URL` | 主站域名（当前为 `https://<项目名>.pages.dev`） |
+| `SITE_BASE_URL` | 主站域名 `https://diankao.github.io` |
 
 - [ ] **Step 2: 创建 workflow 文件**
 

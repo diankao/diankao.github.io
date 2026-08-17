@@ -1,4 +1,4 @@
-baseURL = "https://diankao-blog.pages.dev/"
+baseURL = "https://diankao.github.io/"
 locale = "zh-cn"
 defaultContentLanguage = "zh-cn"
 title = "我的博客"
