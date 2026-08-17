@@ -26,6 +26,7 @@ ShowPostNavLinks = true
 ShowBreadCrumbs = true
 ShowCodeCopyButtons = true
 ShowShareButtons = false
+comments = true
 
 [params.homeInfoParams]
 Title = "你好，我是 diankao"
