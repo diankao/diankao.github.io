@@ -3,6 +3,7 @@ title: "第一篇文章：博客上线"
 date: 2026-08-17
 slug: hello-world
 draft: false
+reviewed: true
 tags: ["随笔"]
 syndicate: cnblogs
 ---

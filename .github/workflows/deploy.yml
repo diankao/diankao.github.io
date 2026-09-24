@@ -23,6 +23,9 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      - name: Validate posts
+        run: python3 scripts/check_posts.py --all
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
